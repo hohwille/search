@@ -5,11 +5,11 @@
   <parent>
     <groupId>net.sf.m-m-m</groupId>
     <artifactId>mmm-search</artifactId>
-    <version>1.0.0</version>
+    <version>dev</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
   <artifactId>mmm-search-release</artifactId>
-  <version>1.0.1-SNAPSHOT</version>
+  <version>${net.sf.mmm.search.version}</version>
   <packaging>jar</packaging>
   <name>${project.artifactId}</name>
   <description>This project bundles the search engine and indexer to a release package.</description>
@@ -17,8 +17,6 @@
     <dependency>
       <groupId>${project.groupId}</groupId>
       <artifactId>mmm-search-indexer-impl-lucene</artifactId>
-      <version>1.0.1</version>
-      <scope>compile</scope>
     </dependency>
   </dependencies>
   
@@ -52,7 +50,7 @@
                 <artifactItem>
                   <groupId>${project.groupId}</groupId>
                   <artifactId>mmm-search-engine-webapp</artifactId>
-                  <version>1.0.1</version>
+                  <version>${net.sf.mmm.search.version}</version>
                   <type>war</type>
                   <overWrite>true</overWrite>
                   <outputDirectory>${project.build.outputDirectory}/mmm-search-engine/webapps</outputDirectory>

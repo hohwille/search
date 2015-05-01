@@ -1,15 +1,15 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>net.sf.m-m-m</groupId>
     <artifactId>mmm-search-engine</artifactId>
-    <version>1.0.0</version>
+    <version>dev</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
-  <modelVersion>4.0.0</modelVersion>
   <artifactId>mmm-search-engine-webapp</artifactId>
-  <version>1.0.2-SNAPSHOT</version>
+  <version>${net.sf.mmm.search.version}</version>
   <packaging>war</packaging>
   <name>${project.artifactId}</name>
   <description>This project a demo webapplication using lucene as search-engine.</description>
@@ -18,7 +18,6 @@
     <dependency>
       <groupId>${project.groupId}</groupId>
       <artifactId>mmm-search-engine-impl-lucene</artifactId>
-      <version>1.0.2-SNAPSHOT</version>
     </dependency>
     <dependency>
       <groupId>org.springframework</groupId>

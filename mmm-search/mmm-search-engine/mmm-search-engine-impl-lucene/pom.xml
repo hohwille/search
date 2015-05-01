@@ -5,10 +5,11 @@
   <parent>
     <groupId>net.sf.m-m-m</groupId>
     <artifactId>mmm-search-engine</artifactId>
-    <version>1.0.0</version>
+    <version>dev</version>
+    <relativePath>../pom.xml</relativePath>
   </parent>
   <artifactId>mmm-search-engine-impl-lucene</artifactId>
-  <version>1.0.2-SNAPSHOT</version>
+  <version>${net.sf.mmm.search.version}</version>
   <packaging>jar</packaging>
   <name>${project.artifactId}</name>
   <description>This project provides an implementation of the search-engine using apache lucene as underlying search-technology.</description>
@@ -21,20 +22,16 @@
     <dependency>
       <groupId>${project.groupId}</groupId>
       <artifactId>mmm-search-engine-api</artifactId>
-      <version>1.0.2-SNAPSHOT</version>
-      <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>org.apache.lucene</groupId>
       <artifactId>lucene-core</artifactId>
       <version>${org.apache.lucene.version}</version>
-      <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>org.apache.lucene</groupId>
       <artifactId>lucene-highlighter</artifactId>
       <version>${org.apache.lucene.version}</version>
-      <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>javax.servlet</groupId>

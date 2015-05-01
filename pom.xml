@@ -26,7 +26,7 @@
     <org.slf4j.version>1.7.6</org.slf4j.version>
     <jacoco.version>0.6.4.201312101107</jacoco.version>
     <!-- Internal project versions -->
-    <net.sf.mmm.util.version>6.0.0</net.sf.mmm.util.version>
+    <net.sf.mmm.util.version>7.0.0-SNAPSHOT</net.sf.mmm.util.version>
     <net.sf.mmm.search.version>1.1.0-SNAPSHOT</net.sf.mmm.search.version>
   </properties>
 
@@ -67,81 +67,10 @@
         <artifactId>spring-test</artifactId>
         <version>${org.springframework.version}</version>
       </dependency>
-      <dependency>
-        <groupId>org.springframework.security</groupId>
-        <artifactId>spring-security-core</artifactId>
-        <version>${org.springsecurity.version}</version>
-      </dependency>
-
-      <dependency>
-        <groupId>org.hibernate</groupId>
-        <artifactId>hibernate-entitymanager</artifactId>
-        <version>${org.hibernate.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.hibernate</groupId>
-        <artifactId>hibernate-envers</artifactId>
-        <version>${org.hibernate.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.hibernate.javax.persistence</groupId>
-        <artifactId>hibernate-jpa-2.1-api</artifactId>
-        <version>1.0.0.Final</version>
-      </dependency>
-      <dependency>
-        <groupId>org.hibernate</groupId>
-        <artifactId>hibernate-validator</artifactId>
-        <version>${org.hibernate.validator.version}</version>
-        <exclusions>
-          <exclusion>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-          </exclusion>
-        </exclusions>
-      </dependency>
-      <dependency>
-        <groupId>org.hibernate</groupId>
-        <artifactId>hibernate-validator</artifactId>
-        <version>${org.hibernate.validator.version}</version>
-        <classifier>sources</classifier>
-        <exclusions>
-          <exclusion>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-          </exclusion>
-        </exclusions>
-      </dependency>
-      <dependency>
-        <groupId>c3p0</groupId>
-        <artifactId>c3p0</artifactId>
-        <version>0.9.1.2</version>
-      </dependency>
-      <dependency>
-        <groupId>javax.validation</groupId>
-        <artifactId>validation-api</artifactId>
-        <version>${javax.validation.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>javax.validation</groupId>
-        <artifactId>validation-api</artifactId>
-        <version>${javax.validation.version}</version>
-        <classifier>sources</classifier>
-      </dependency>
 
       <dependency>
         <groupId>org.slf4j</groupId>
         <artifactId>slf4j-api</artifactId>
-        <version>${org.slf4j.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.slf4j</groupId>
-        <artifactId>slf4j-api</artifactId>
-        <version>${org.slf4j.version}</version>
-        <classifier>sources</classifier>
-      </dependency>
-      <dependency>
-        <groupId>org.slf4j</groupId>
-        <artifactId>slf4j-log4j12</artifactId>
         <version>${org.slf4j.version}</version>
       </dependency>
       <dependency>
@@ -150,34 +79,6 @@
         <version>1.1.1</version>
       </dependency>
 
-      <dependency>
-        <groupId>com.google.gwt</groupId>
-        <artifactId>gwt-dev</artifactId>
-        <version>${com.google.gwt.version}</version>
-        <scope>provided</scope>
-      </dependency>
-      <dependency>
-        <groupId>com.google.gwt</groupId>
-        <artifactId>gwt-codeserver</artifactId>
-        <version>${com.google.gwt.version}</version>
-        <scope>provided</scope>
-      </dependency>
-      <dependency>
-        <groupId>com.google.gwt</groupId>
-        <artifactId>gwt-user</artifactId>
-        <version>${com.google.gwt.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>com.google.gwt</groupId>
-        <artifactId>gwt-servlet</artifactId>
-        <version>${com.google.gwt.version}</version>
-      </dependency>
-
-      <dependency>
-        <groupId>com.allen-sauer.gwt.log</groupId>
-        <artifactId>gwt-log</artifactId>
-        <version>3.1.7</version>
-      </dependency>
       <dependency>
         <groupId>javax.annotation</groupId>
         <artifactId>jsr250-api</artifactId>
@@ -207,9 +108,104 @@
 
       <!-- Internal dependencies -->
       <dependency>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>mmm-test</artifactId>
+        <version>${net.sf.mmm.util.version}</version>
+      </dependency>
+      <dependency>
         <groupId>net.sf.m-m-m</groupId>
         <artifactId>mmm-util-core</artifactId>
         <version>${net.sf.mmm.util.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>mmm-util-io</artifactId>
+        <version>${net.sf.mmm.util.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>mmm-util-cli</artifactId>
+        <version>${net.sf.mmm.util.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>mmm-search-engine-api</artifactId>
+        <version>${net.sf.mmm.search.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>mmm-search-engine-impl-lucene</artifactId>
+        <version>${net.sf.mmm.search.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>mmm-search-engine-webapp</artifactId>
+        <version>${net.sf.mmm.search.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>mmm-search-indexer-api</artifactId>
+        <version>${net.sf.mmm.search.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>mmm-search-indexer-base</artifactId>
+        <version>${net.sf.mmm.search.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>mmm-search-indexer-impl-lucene</artifactId>
+        <version>${net.sf.mmm.search.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>mmm-content-parser-api</artifactId>
+        <version>${net.sf.mmm.search.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>mmm-content-parser-impl-text</artifactId>
+        <version>${net.sf.mmm.search.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>mmm-content-parser-impl-html</artifactId>
+        <version>${net.sf.mmm.search.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>mmm-content-parser-impl-xml</artifactId>
+        <version>${net.sf.mmm.search.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>mmm-content-parser-impl-pdf</artifactId>
+        <version>${net.sf.mmm.search.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>mmm-content-parser-impl-poi</artifactId>
+        <version>${net.sf.mmm.search.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>mmm-content-parser-impl-java</artifactId>
+        <version>${net.sf.mmm.search.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>mmm-content-parser-impl-opendoc</artifactId>
+        <version>${net.sf.mmm.search.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>mmm-content-parser-impl-generic</artifactId>
+        <version>${net.sf.mmm.search.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>mmm-content-parser-service</artifactId>
+        <version>${net.sf.mmm.search.version}</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
@@ -380,6 +376,11 @@
           <version>2.2</version>
         </plugin>
         <plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>flatten-maven-plugin</artifactId>
+          <version>1.0.0-beta-4</version>
+        </plugin>
+        <plugin>
           <groupId>org.eclipse.m2e</groupId>
           <artifactId>lifecycle-mapping</artifactId>
           <version>1.0.0</version>
@@ -444,8 +445,29 @@
       </plugin>
 
       <!-- generate and use consumer pom instead of pom.xml -->
-      <!--
-      -->
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>flatten-maven-plugin</artifactId>
+        <configuration>
+          <flattenMode>oss</flattenMode>
+        </configuration>
+        <executions>
+          <execution>
+            <id>flatten</id>
+            <phase>process-test-resources</phase>
+            <goals>
+              <goal>flatten</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>flatten.clean</id>
+            <phase>clean</phase>
+            <goals>
+              <goal>clean</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
 
       <!-- also generate source JARs -->
       <plugin>
@@ -666,31 +688,6 @@
                 <phase>verify</phase>
                 <goals>
                   <goal>sign</goal>
-                </goals>
-              </execution>
-            </executions>
-          </plugin>
-          <plugin>
-            <groupId>org.codehaus.mojo</groupId>
-            <artifactId>flatten-maven-plugin</artifactId>
-            <version>1.0.0-beta-3</version>
-            <configuration>
-              <flattenMode>oss</flattenMode>
-              <!--<updatePomFile>false</updatePomFile>-->
-            </configuration>
-            <executions>
-              <execution>
-                <id>flatten</id>
-                <phase>process-test-resources</phase>
-                <goals>
-                  <goal>flatten</goal>
-                </goals>
-              </execution>
-              <execution>
-                <id>flatten.clean</id>
-                <phase>clean</phase>
-                <goals>
-                  <goal>clean</goal>
                 </goals>
               </execution>
             </executions>

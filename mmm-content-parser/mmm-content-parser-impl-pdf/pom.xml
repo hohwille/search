@@ -5,11 +5,11 @@
   <parent>
     <groupId>net.sf.m-m-m</groupId>
     <artifactId>mmm-content-parser</artifactId>
-    <version>1.0.0</version>
+    <version>dev</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
   <artifactId>mmm-content-parser-impl-pdf</artifactId>
-  <version>1.0.2-SNAPSHOT</version>
+  <version>${net.sf.mmm.search.version}</version>
   <packaging>jar</packaging>
   <name>${project.artifactId}</name>
   <description>Content parser for files of the mimetype "application/pdf".</description>
@@ -18,14 +18,11 @@
     <dependency>
       <groupId>${project.groupId}</groupId>
       <artifactId>mmm-content-parser-api</artifactId>
-      <version>1.0.2-SNAPSHOT</version>
-      <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>org.apache.pdfbox</groupId>
       <artifactId>pdfbox</artifactId>
       <version>1.3.1</version>
-      <scope>compile</scope>
     </dependency>
   </dependencies>
 </project>
