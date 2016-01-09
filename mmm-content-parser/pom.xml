@@ -4,9 +4,9 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>net.sf.m-m-m</groupId>
-    <artifactId>mmm-search-parent</artifactId>
+    <artifactId>mmm-search-modules</artifactId>
     <version>dev</version>
-    <relativePath>../pom.xml</relativePath>
+    <relativePath>../mmm-search-modules/pom.xml</relativePath>
   </parent>
   <artifactId>mmm-content-parser</artifactId>
   <packaging>pom</packaging>
@@ -26,11 +26,4 @@
     <module>mmm-content-parser-service</module>
   </modules>
   
-  <dependencies>
-    <dependency>
-      <groupId>${project.groupId}</groupId>
-      <artifactId>mmm-test</artifactId>
-      <scope>test</scope>
-    </dependency>
-  </dependencies>    
 </project>

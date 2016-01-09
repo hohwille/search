@@ -1,2 +1,6 @@
+.*
+*.bak
+*.iml
+*.log
 target
 eclipse-target
