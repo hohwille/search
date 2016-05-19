@@ -13,8 +13,8 @@
   <description>The actual modules of mmm-search.</description>
 
   <modules>
-    <module>../mmm-content-parser</module>
-    <module>../mmm-search</module>
+    <module>../content-parser</module>
+    <module>../search</module>
   </modules>
 
   <dependencyManagement>

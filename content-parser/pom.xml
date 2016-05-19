@@ -6,7 +6,7 @@
     <groupId>net.sf.m-m-m</groupId>
     <artifactId>mmm-search-modules</artifactId>
     <version>dev</version>
-    <relativePath>../mmm-search-modules/pom.xml</relativePath>
+    <relativePath>../modules/pom.xml</relativePath>
   </parent>
   <artifactId>mmm-content-parser</artifactId>
   <packaging>pom</packaging>
@@ -14,16 +14,16 @@
   <description>This project provides parsers used to extract information from various fileformats for seach-indexing.</description>
   
   <modules>
-    <module>mmm-content-parser-api</module>
-    <module>mmm-content-parser-impl-xml</module>
-    <module>mmm-content-parser-impl-html</module>
-    <module>mmm-content-parser-impl-pdf</module>
-    <module>mmm-content-parser-impl-poi</module>
-    <module>mmm-content-parser-impl-opendoc</module>
-    <module>mmm-content-parser-impl-generic</module>
-    <module>mmm-content-parser-impl-text</module>
-    <module>mmm-content-parser-impl-java</module>
-    <module>mmm-content-parser-service</module>
+    <module>api</module>
+    <module>impl-xml</module>
+    <module>impl-html</module>
+    <module>impl-pdf</module>
+    <module>impl-poi</module>
+    <module>impl-opendoc</module>
+    <module>impl-generic</module>
+    <module>impl-text</module>
+    <module>impl-java</module>
+    <module>service</module>
   </modules>
   
 </project>

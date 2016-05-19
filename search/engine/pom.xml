@@ -4,18 +4,18 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>net.sf.m-m-m</groupId>
-    <artifactId>mmm-search-modules</artifactId>
+    <artifactId>mmm-search</artifactId>
     <version>dev</version>
-    <relativePath>../mmm-search-modules/pom.xml</relativePath>
+    <relativePath>../pom.xml</relativePath>
   </parent>
-  <artifactId>mmm-search</artifactId>
+  <artifactId>mmm-search-engine</artifactId>
   <packaging>pom</packaging>
   <name>${project.artifactId}</name>
-  <description>This project provides full-text search indexing and retrieval.</description>
-
+  <description>This project provides the engine used for full-text search indexing and retrieval.</description>
+  
   <modules>
-    <module>mmm-search-engine</module>
-    <module>mmm-search-indexer</module>
+    <module>api</module>
+    <module>impl-lucene</module>
+    <module>webapp</module>
   </modules>
-
 </project>
