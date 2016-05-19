@@ -9,8 +9,6 @@ import java.util.List;
 import javax.inject.Named;
 import javax.inject.Singleton;
 
-import net.sf.mmm.content.parser.api.ContentParserOptions;
-
 import org.apache.poi.hssf.eventusermodel.HSSFEventFactory;
 import org.apache.poi.hssf.eventusermodel.HSSFListener;
 import org.apache.poi.hssf.eventusermodel.HSSFRequest;
@@ -24,10 +22,12 @@ import org.apache.poi.hssf.record.SSTRecord;
 import org.apache.poi.hssf.record.TextObjectRecord;
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 
+import net.sf.mmm.content.parser.api.ContentParserOptions;
+
 /**
- * This is the implementation of the {@link net.sf.mmm.content.parser.api.ContentParser} interface for binary MS-Excel
- * documents.
- * 
+ * This is the implementation of the {@link net.sf.mmm.content.parser.api.ContentParser} interface for binary
+ * MS-Excel documents.
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
 @Singleton
@@ -77,8 +77,7 @@ public class ContentParserXls extends AbstractContentParserPoi {
    * {@inheritDoc}
    */
   @Override
-  protected String extractText(POIFSFileSystem poiFs, long filesize, ContentParserOptions options)
-      throws Exception {
+  protected String extractText(POIFSFileSystem poiFs, long filesize, ContentParserOptions options) throws Exception {
 
     int maxBufferSize = options.getMaximumBufferSize();
     int maxCharSize = maxBufferSize / 2;
@@ -126,7 +125,7 @@ public class ContentParserXls extends AbstractContentParserPoi {
 
     /**
      * The constructor.
-     * 
+     *
      * @param textBuffer is the buffer where to append the text to.
      * @param maximumBufferSize is the maximum allowed size of the <code>textBuffer</code>.
      */
@@ -135,7 +134,7 @@ public class ContentParserXls extends AbstractContentParserPoi {
       super();
       this.buffer = textBuffer;
       this.bufferLimit = maximumBufferSize;
-      this.sheetNames = new ArrayList<String>();
+      this.sheetNames = new ArrayList<>();
       this.sstrec = null;
       this.row = 0;
       this.sheet = 0;
@@ -143,7 +142,7 @@ public class ContentParserXls extends AbstractContentParserPoi {
 
     /**
      * This method appends the given <code>text</code> to the buffer.
-     * 
+     *
      * @param text is the text to append.
      */
     private void append(String text) {
@@ -202,7 +201,7 @@ public class ContentParserXls extends AbstractContentParserPoi {
             TextObjectRecord txo = (TextObjectRecord) record;
             append(txo.getStr().getString());
             break;
-          default:
+          default :
             break;
         }
       }
