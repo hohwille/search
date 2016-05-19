@@ -10,6 +10,8 @@ import org.springframework.context.annotation.Import;
 import net.sf.mmm.content.parser.api.ContentParserService;
 import net.sf.mmm.content.parser.impl.ContentParserServiceImpl;
 import net.sf.mmm.util.context.impl.spring.UtilContextSpringConfig;
+import net.sf.mmm.util.io.impl.spring.UtilIoSpringConfig;
+import net.sf.mmm.util.xml.impl.spring.UtilXmlSpringConfig;
 
 /**
  * This is the Spring {@link Configuration} for {@link net.sf.mmm.util.io}.
@@ -19,7 +21,7 @@ import net.sf.mmm.util.context.impl.spring.UtilContextSpringConfig;
  */
 @Configuration
 @ComponentScan(basePackageClasses = ContentParserServiceImpl.class)
-@Import(UtilContextSpringConfig.class)
+@Import({ UtilContextSpringConfig.class, UtilXmlSpringConfig.class, UtilIoSpringConfig.class })
 @SuppressWarnings("javadoc")
 public class ContentParserSpringConfig {
 
