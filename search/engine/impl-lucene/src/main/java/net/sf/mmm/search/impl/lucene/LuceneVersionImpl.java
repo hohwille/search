@@ -2,21 +2,16 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.search.impl.lucene;
 
-import javax.inject.Named;
-import javax.inject.Singleton;
+import org.apache.lucene.util.Version;
 
 import net.sf.mmm.util.component.base.AbstractComponent;
 
-import org.apache.lucene.util.Version;
-
 /**
  * This is the implementation of the {@link LuceneVersion} interface.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-@Singleton
-@Named
 public class LuceneVersionImpl extends AbstractComponent implements LuceneVersion {
 
   /** @see #getLuceneVersion() */

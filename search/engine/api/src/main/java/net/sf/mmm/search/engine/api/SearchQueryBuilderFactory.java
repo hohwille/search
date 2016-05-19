@@ -9,15 +9,12 @@ import net.sf.mmm.util.component.api.ComponentSpecification;
 /**
  * This is the interface for a factory used to create a {@link SearchQueryBuilder}. <br>
  * End users should typically use {@link SearchEngine#getQueryBuilder()} instead.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
 @ComponentSpecification
 public interface SearchQueryBuilderFactory {
-
-  /** The {@link net.sf.mmm.util.component.api.Cdi#CDI_NAME CDI name}. */
-  String CDI_NAME = "net.sf.mmm.search.engine.api.SearchQueryBuilderFactory";
 
   // /**
   // * This method will create a default {@link SearchQueryBuilder}.
@@ -28,7 +25,7 @@ public interface SearchQueryBuilderFactory {
 
   /**
    * This method will create a new {@link SearchQueryBuilder}.
-   * 
+   *
    * @param configurationHolder is the {@link SearchConfigurationHolder}. The
    *        {@link net.sf.mmm.search.api.config.SearchConfiguration#getFields() fields} will be used for the
    *        query parsing and {@link net.sf.mmm.search.api.config.SearchConfiguration#getProperties()

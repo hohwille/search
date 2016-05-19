@@ -3,8 +3,8 @@
 package net.sf.mmm.search.engine.impl.lucene;
 
 import javax.inject.Inject;
-import javax.inject.Named;
-import javax.inject.Singleton;
+
+import org.apache.lucene.analysis.Analyzer;
 
 import net.sf.mmm.search.api.config.SearchConfiguration;
 import net.sf.mmm.search.api.config.SearchConfigurationHolder;
@@ -16,16 +16,12 @@ import net.sf.mmm.util.component.base.AbstractLoggableComponent;
 import net.sf.mmm.util.date.api.Iso8601Util;
 import net.sf.mmm.util.date.base.Iso8601UtilImpl;
 
-import org.apache.lucene.analysis.Analyzer;
-
 /**
  * This is the factory used to {@link #createFieldManager(SearchConfigurationHolder) create}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-@Singleton
-@Named(LuceneFieldManagerFactory.CDI_NAME)
 public class LuceneFieldManagerFactoryImpl extends AbstractLoggableComponent implements LuceneFieldManagerFactory {
 
   /** @see #getAnalyzer() */

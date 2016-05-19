@@ -6,14 +6,11 @@ import net.sf.mmm.search.api.config.SearchConfigurationLoader;
 
 /**
  * This is the {@link SearchConfigurationLoader} for the {@link SearchEngineConfiguration}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
 public interface SearchEngineConfigurationLoader extends SearchConfigurationLoader {
-
-  /** The {@link net.sf.mmm.util.component.api.Cdi#CDI_NAME CDI name}. */
-  String CDI_NAME = "net.sf.mmm.search.engine.api.config.SearchEngineConfigurationLoader";
 
   /**
    * {@inheritDoc}

@@ -3,8 +3,6 @@
 package net.sf.mmm.search.base;
 
 import javax.inject.Inject;
-import javax.inject.Named;
-import javax.inject.Singleton;
 
 import net.sf.mmm.util.component.base.AbstractComponent;
 import net.sf.mmm.util.date.api.Iso8601Util;
@@ -14,12 +12,10 @@ import net.sf.mmm.util.math.base.MathUtilImpl;
 
 /**
  * This is the implementation of the {@link SearchDependencies} interface.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-@Singleton
-@Named
 public class SearchDependenciesImpl extends AbstractComponent implements SearchDependencies {
 
   /** @see #getMathUtil() */

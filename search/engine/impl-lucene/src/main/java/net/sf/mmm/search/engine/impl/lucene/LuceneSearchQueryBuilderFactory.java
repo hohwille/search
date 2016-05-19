@@ -3,8 +3,8 @@
 package net.sf.mmm.search.engine.impl.lucene;
 
 import javax.inject.Inject;
-import javax.inject.Named;
-import javax.inject.Singleton;
+
+import org.apache.lucene.analysis.Analyzer;
 
 import net.sf.mmm.search.api.config.SearchConfiguration;
 import net.sf.mmm.search.api.config.SearchConfigurationHolder;
@@ -16,16 +16,12 @@ import net.sf.mmm.search.impl.lucene.LuceneVersion;
 import net.sf.mmm.search.impl.lucene.LuceneVersionImpl;
 import net.sf.mmm.util.exception.api.NlsNullPointerException;
 
-import org.apache.lucene.analysis.Analyzer;
-
 /**
  * This is the implementation of {@link SearchQueryBuilderFactory} using lucene as underlying search-engine.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-@Singleton
-@Named(SearchQueryBuilderFactory.CDI_NAME)
 public class LuceneSearchQueryBuilderFactory extends AbstractSearchQueryBuilderFactory {
 
   /** @see #getAnalyzer() */

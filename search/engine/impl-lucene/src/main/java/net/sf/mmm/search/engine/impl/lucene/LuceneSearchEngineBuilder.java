@@ -5,8 +5,11 @@ package net.sf.mmm.search.engine.impl.lucene;
 import java.io.IOException;
 
 import javax.inject.Inject;
-import javax.inject.Named;
-import javax.inject.Singleton;
+
+import org.apache.lucene.analysis.Analyzer;
+import org.apache.lucene.index.IndexReader;
+import org.apache.lucene.search.highlight.Formatter;
+import org.apache.lucene.store.Directory;
 
 import net.sf.mmm.search.api.config.SearchConfiguration;
 import net.sf.mmm.search.api.config.SearchConfigurationHolder;
@@ -27,19 +30,12 @@ import net.sf.mmm.util.io.api.IoMode;
 import net.sf.mmm.util.io.api.RuntimeIoException;
 import net.sf.mmm.util.lang.api.StringUtil;
 
-import org.apache.lucene.analysis.Analyzer;
-import org.apache.lucene.index.IndexReader;
-import org.apache.lucene.search.highlight.Formatter;
-import org.apache.lucene.store.Directory;
-
 /**
  * This is the implementation of {@link SearchEngineBuilder} using apache lucene as underlying search-engine.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-@Singleton
-@Named(SearchEngineBuilder.CDI_NAME)
 public class LuceneSearchEngineBuilder extends AbstractSearchEngineBuilder {
 
   /** @see #getAnalyzer() */
@@ -85,7 +81,7 @@ public class LuceneSearchEngineBuilder extends AbstractSearchEngineBuilder {
   /**
    * This method sets (injects) the {@link LuceneAnalyzer}. You may also use {@link #setAnalyzer(Analyzer)} if
    * you assemble this component manually.
-   * 
+   *
    * @param luceneAnalyzer is the luceneAnalyzer to set
    */
   @Inject
@@ -133,7 +129,7 @@ public class LuceneSearchEngineBuilder extends AbstractSearchEngineBuilder {
 
   /**
    * This method gets the {@link LuceneFieldManagerFactory}.
-   * 
+   *
    * @return the {@link LuceneFieldManagerFactory}.
    */
   protected LuceneFieldManagerFactory getFieldManagerFactory() {
@@ -217,7 +213,7 @@ public class LuceneSearchEngineBuilder extends AbstractSearchEngineBuilder {
 
   /**
    * This method creates a {@link ManagedSearchEngine} for an existing {@link IndexReader}.
-   * 
+   *
    * @param indexReader is the {@link IndexReader}.
    * @param configurationHolder is the {@link SearchConfigurationHolder}.
    * @param refresher is the {@link PeriodicRefresher} or <code>null</code> to disable auto-refresh.
@@ -227,9 +223,9 @@ public class LuceneSearchEngineBuilder extends AbstractSearchEngineBuilder {
       SearchConfigurationHolder<? extends SearchConfiguration> configurationHolder, PeriodicRefresher refresher) {
 
     LuceneFieldManager fieldManager = this.fieldManagerFactory.createFieldManager(configurationHolder);
-    LuceneSearchEngine engine = new LuceneSearchEngine(indexReader, this.analyzer, getSearchQueryBuilderFactory()
-        .createQueryBuilder(configurationHolder), this.highlightFormatter, fieldManager, getSearchDependencies(),
-        refresher);
+    LuceneSearchEngine engine = new LuceneSearchEngine(indexReader, this.analyzer,
+        getSearchQueryBuilderFactory().createQueryBuilder(configurationHolder), this.highlightFormatter, fieldManager,
+        getSearchDependencies(), refresher);
     engine.initialize();
     return engine;
   }

@@ -3,22 +3,18 @@
 package net.sf.mmm.search.impl.lucene;
 
 import javax.inject.Inject;
-import javax.inject.Named;
-import javax.inject.Singleton;
-
-import net.sf.mmm.util.component.base.AbstractComponent;
 
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 
+import net.sf.mmm.util.component.base.AbstractComponent;
+
 /**
  * This is the implementation of the {@link LuceneAnalyzer} interface.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-@Singleton
-@Named
 public class LuceneAnalyzerImpl extends AbstractComponent implements LuceneAnalyzer {
 
   /** @see #setLuceneVersion(LuceneVersion) */

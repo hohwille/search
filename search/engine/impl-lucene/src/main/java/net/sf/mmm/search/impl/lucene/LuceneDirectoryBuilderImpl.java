@@ -7,8 +7,10 @@ import java.io.IOException;
 import java.util.Locale;
 
 import javax.inject.Inject;
-import javax.inject.Named;
-import javax.inject.Singleton;
+
+import org.apache.lucene.store.Directory;
+import org.apache.lucene.store.NIOFSDirectory;
+import org.apache.lucene.store.SimpleFSDirectory;
 
 import net.sf.mmm.search.api.config.SearchIndexConfiguration;
 import net.sf.mmm.util.component.base.AbstractComponent;
@@ -20,18 +22,12 @@ import net.sf.mmm.util.lang.api.SystemInformation;
 import net.sf.mmm.util.lang.api.SystemUtil;
 import net.sf.mmm.util.lang.base.SystemUtilImpl;
 
-import org.apache.lucene.store.Directory;
-import org.apache.lucene.store.NIOFSDirectory;
-import org.apache.lucene.store.SimpleFSDirectory;
-
 /**
  * This is the implementation of the {@link LuceneDirectoryBuilder} interface.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-@Singleton
-@Named
 public class LuceneDirectoryBuilderImpl extends AbstractComponent implements LuceneDirectoryBuilder {
 
   /** The suffix for the lucene directory. */
@@ -105,8 +101,8 @@ public class LuceneDirectoryBuilderImpl extends AbstractComponent implements Luc
       location = location.substring(7);
     }
     File path = new File(location);
-    boolean windows = SystemInformation.SYSTEM_TYPE_WINDOWS.equals(this.systemUtil
-        .getSystemInformation().getSystemType());
+    boolean windows = SystemInformation.SYSTEM_TYPE_WINDOWS
+        .equals(this.systemUtil.getSystemInformation().getSystemType());
     try {
       if (windows) {
         return new SimpleFSDirectory(path);
