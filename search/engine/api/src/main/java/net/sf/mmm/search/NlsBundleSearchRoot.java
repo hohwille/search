@@ -296,12 +296,8 @@ public interface NlsBundleSearchRoot extends NlsBundle {
       + "{operand}. By default annotation based config is used.";
 
   /** See net.sf.mmm.search.indexer.impl.SearchIndexerMain */
-  String INF_INDEXER_MAIN_OPTION_NAME_SPRING_XML = "--spring-xml";
-
-  /** See net.sf.mmm.search.indexer.impl.SearchIndexerMain */
-  String MSG_MAIN_OPTION_USAGE_SPRING_PACKAGES = "The optional list of java packages where spring should look for "
-      + "annotated beans. The default is {default}. This option is ignored, if "
-      + INF_INDEXER_MAIN_OPTION_NAME_SPRING_XML + " is set.";
+  String MSG_MAIN_OPTION_USAGE_SPRING_CLASSES = "The optional list of spring @Configuration classes spring should load "
+      + "to configure the context. The default is {default}.";
 
   /** See net.sf.mmm.search.indexer.base.AbstractSearchIndexerMain */
   String MSG_SEARCH_INDEXER_MAIN_MODE_USAGE_DEFAULT = "Perform search-indexing according to the configuration.";

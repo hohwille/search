@@ -2,7 +2,9 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.search.indexer.impl;
 
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import net.sf.mmm.search.NlsBundleSearchRoot;
 import net.sf.mmm.search.indexer.base.AbstractSearchIndexerMain;
@@ -10,6 +12,7 @@ import net.sf.mmm.search.indexer.impl.spring.SearchIndexerSpringConfig;
 import net.sf.mmm.util.cli.api.CliOption;
 import net.sf.mmm.util.component.api.IocContainer;
 import net.sf.mmm.util.component.impl.SpringContainer;
+import net.sf.mmm.util.reflect.api.TypeNotFoundException;
 
 /**
  * This is the main program that triggers the {@link net.sf.mmm.search.indexer.api.ConfiguredSearchIndexer
@@ -21,16 +24,13 @@ import net.sf.mmm.util.component.impl.SpringContainer;
  */
 public class SearchIndexerMain extends AbstractSearchIndexerMain {
 
-  // /** The optional context-path for the spring-context. */
-  // @CliOption(name = NlsBundleSearchRoot.INF_INDEXER_MAIN_OPTION_NAME_SPRING_XML, //
-  // required = false, operand = "FILE", //
-  // usage = NlsBundleSearchRoot.MSG_MAIN_OPTION_USAGE_SPRING_XML)
-  // private String springConfig;
+  /** The optional context-path for the spring-context. */
+  @CliOption(name = "--spring-xml", required = false, operand = "FILE", usage = NlsBundleSearchRoot.MSG_MAIN_OPTION_USAGE_SPRING_XML)
+  private String springConfig;
 
   /** The optional context-path for the spring-context. */
-  @CliOption(name = "--spring-packages", required = false, operand = "PACKAGES", //
-      usage = NlsBundleSearchRoot.MSG_MAIN_OPTION_USAGE_SPRING_PACKAGES)
-  private String[] springPackages;
+  @CliOption(name = "--spring-class", required = false, operand = "CLASSES", usage = NlsBundleSearchRoot.MSG_MAIN_OPTION_USAGE_SPRING_CLASSES)
+  private String[] springClasses;
 
   /** The {@link IocContainer}. */
   private IocContainer container;
@@ -41,9 +41,6 @@ public class SearchIndexerMain extends AbstractSearchIndexerMain {
   public SearchIndexerMain() {
 
     super();
-    this.container = null;
-    // this.springConfig = null;
-    this.springPackages = null;
   }
 
   /**
@@ -54,13 +51,29 @@ public class SearchIndexerMain extends AbstractSearchIndexerMain {
 
     if (this.container == null) {
       getLogger().info("Starting spring context...");
-      AnnotationConfigApplicationContext springContext;
-      if (this.springPackages == null) {
-        this.springPackages = new String[] { "net.sf.mmm.search" };
+      ConfigurableApplicationContext springContext;
+      if (this.springConfig != null) {
+        springContext = new ClassPathXmlApplicationContext(this.springConfig);
+      } else {
+        @SuppressWarnings("resource")
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
+        Class<?>[] configClasses;
+        if ((this.springClasses == null) || (this.springClasses.length == 0)) {
+          configClasses = new Class<?>[] { SearchIndexerSpringConfig.class };
+        } else {
+          configClasses = new Class<?>[this.springClasses.length];
+          for (int i = 0; i < this.springClasses.length; i++) {
+            try {
+              configClasses[i++] = Class.forName(this.springClasses[i]);
+            } catch (ClassNotFoundException e) {
+              throw new TypeNotFoundException(e, this.springClasses[i]);
+            }
+          }
+        }
+        context.register(configClasses);
+        context.refresh();
+        springContext = context;
       }
-      springContext = new AnnotationConfigApplicationContext();
-      springContext.register(SearchIndexerSpringConfig.class);
-      springContext.refresh();
       this.container = new SpringContainer(springContext);
       getLogger().info("Spring context started...");
     }
