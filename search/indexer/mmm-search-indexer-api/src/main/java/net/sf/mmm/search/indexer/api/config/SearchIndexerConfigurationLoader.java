@@ -7,15 +7,12 @@ import net.sf.mmm.util.component.api.ComponentSpecification;
 
 /**
  * This is the {@link SearchConfigurationLoader} for the {@link SearchIndexerConfiguration}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
 @ComponentSpecification
 public interface SearchIndexerConfigurationLoader extends SearchConfigurationLoader {
-
-  /** The {@link net.sf.mmm.util.component.api.Cdi#CDI_NAME CDI name}. */
-  String CDI_NAME = "net.sf.mmm.search.indexer.api.config.SearchIndexerConfigurationLoader";
 
   /**
    * {@inheritDoc}
@@ -31,7 +28,7 @@ public interface SearchIndexerConfigurationLoader extends SearchConfigurationLoa
 
   /**
    * This method validates the given <code>configuration</code> according to logical constraints.
-   * 
+   *
    * @param configuration is the {@link SearchIndexerConfiguration} to validate.
    * @throws RuntimeException if the configuration is invalid.
    */

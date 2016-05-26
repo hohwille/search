@@ -9,15 +9,12 @@ import net.sf.mmm.util.resource.api.DataResource;
 
 /**
  * This is the interface for a higher-level {@link SearchIndexer}. It can index
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
 @ComponentSpecification
 public interface ResourceSearchIndexer {
-
-  /** The {@link net.sf.mmm.util.component.api.Cdi#CDI_NAME CDI name}. */
-  String CDI_NAME = "net.sf.mmm.search.indexer.api.ResourceSearchIndexer";
 
   /**
    * This method creates a {@link MutableSearchEntry} for a single {@link DataResource}. It may be used for
@@ -27,7 +24,7 @@ public interface ResourceSearchIndexer {
    * <b>ATTENTION:</b><br>
    * This method will NOT {@link SearchIndexer#add(MutableSearchEntry) index} the given <code>resource</code>.
    * You have to do that manually after calling this method.
-   * 
+   *
    * @param indexer is the {@link SearchIndexer} used for indexing.
    * @param resource is the {@link DataResource} to index.
    * @param resourceUri is the {@link MutableSearchEntry#getUri() URI} for the {@link MutableSearchEntry
@@ -42,7 +39,7 @@ public interface ResourceSearchIndexer {
    * If you are indexing many {@link DataResource resources}, you should use
    * {@link #index(SearchIndexer, DataResource, ChangeType, SearchIndexerDataLocation, EntryUpdateVisitor, DataResource)}
    * to avoid performance-overhead.
-   * 
+   *
    * @param indexer is the {@link SearchIndexer} used for indexing.
    * @param resource is the {@link DataResource} to index.
    * @param changeType indicates the change for <code>resource</code>. In case of {@link ChangeType#ADD add}
@@ -62,7 +59,7 @@ public interface ResourceSearchIndexer {
    * If you are indexing many {@link DataResource resources}, you should use
    * {@link #index(SearchIndexer, DataResource, ChangeType, SearchIndexerDataLocation, EntryUpdateVisitor, DataResource)}
    * to avoid performance-overhead.
-   * 
+   *
    * @param indexer is the {@link SearchIndexer} used for indexing.
    * @param resource is the {@link DataResource} to index.
    * @param changeType indicates the change for <code>resource</code>. In case of {@link ChangeType#ADD add}
@@ -80,7 +77,7 @@ public interface ResourceSearchIndexer {
 
   /**
    * This method indexes a single {@link DataResource}.
-   * 
+   *
    * @param indexer is the {@link SearchIndexer} used for indexing.
    * @param resource is the {@link DataResource} to index.
    * @param changeType indicates the change for <code>resource</code>. In case of {@link ChangeType#ADD add}
@@ -99,7 +96,7 @@ public interface ResourceSearchIndexer {
 
   /**
    * This method indexes a single {@link DataResource}.
-   * 
+   *
    * @param indexer is the {@link SearchIndexer} used for indexing.
    * @param resource is the {@link DataResource} to index.
    * @param changeType indicates the change for <code>resource</code>. In case of {@link ChangeType#ADD add}

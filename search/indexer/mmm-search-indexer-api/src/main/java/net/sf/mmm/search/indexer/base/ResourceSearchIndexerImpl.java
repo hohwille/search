@@ -7,8 +7,6 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 
 import javax.inject.Inject;
-import javax.inject.Named;
-import javax.inject.Singleton;
 
 import net.sf.mmm.content.parser.api.ContentParser;
 import net.sf.mmm.content.parser.api.ContentParserOptions;
@@ -30,12 +28,10 @@ import net.sf.mmm.util.resource.api.DataResource;
 
 /**
  * This is the implementation of {@link ResourceSearchIndexer}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-@Named(ResourceSearchIndexer.CDI_NAME)
-@Singleton
 public class ResourceSearchIndexerImpl extends AbstractResourceSearchIndexer {
 
   /** @see #getParserService() */
@@ -118,7 +114,7 @@ public class ResourceSearchIndexerImpl extends AbstractResourceSearchIndexer {
 
   /**
    * @see #createEntry(SearchIndexer, DataResource, String)
-   * 
+   *
    * @param indexer is the {@link SearchIndexer} used for indexing.
    * @param resource is the {@link DataResource} to index.
    * @param resourceUri is the {@link MutableSearchEntry#getUri() URI} for the {@link MutableSearchEntry

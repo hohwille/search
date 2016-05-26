@@ -2,9 +2,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.search.indexer.base.state;
 
-import javax.inject.Named;
-import javax.inject.Singleton;
-
 import net.sf.mmm.search.indexer.api.config.SearchIndexerConfiguration;
 import net.sf.mmm.search.indexer.api.config.SearchIndexerDataLocation;
 import net.sf.mmm.search.indexer.api.config.SearchIndexerSource;
@@ -14,16 +11,13 @@ import net.sf.mmm.util.resource.api.DataResource;
 import net.sf.mmm.util.xml.base.jaxb.XmlBeanMapper;
 
 /**
- * This is the default implementation of the {@link SearchIndexerStateLoader}
- * interface.
- * 
+ * This is the default implementation of the {@link SearchIndexerStateLoader} interface.
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-@Singleton
-@Named
-public class SearchIndexerStateLoaderImpl extends XmlBeanMapper<SearchIndexerStateBean> implements
-    SearchIndexerStateLoader {
+public class SearchIndexerStateLoaderImpl extends XmlBeanMapper<SearchIndexerStateBean>
+    implements SearchIndexerStateLoader {
 
   /** @see #load(SearchIndexerConfiguration) */
   private static final String CONFIGURATION_FILENAME = "mmm-index-state.xml";

@@ -4,9 +4,6 @@ package net.sf.mmm.search.indexer.impl.strategy;
 
 import java.util.Set;
 
-import javax.inject.Named;
-import javax.inject.Singleton;
-
 import net.sf.mmm.search.api.SearchEntry;
 import net.sf.mmm.search.engine.api.SearchEngine;
 import net.sf.mmm.search.engine.api.SearchHit;
@@ -23,14 +20,12 @@ import net.sf.mmm.util.resource.api.BrowsableResource;
 
 /**
  * This is the implementation of the
- * {@link net.sf.mmm.search.indexer.api.strategy.SearchIndexerUpdateStrategy}
- * for {@link SearchIndexerSource#UPDATE_STRATEGY_VCS}.
- * 
+ * {@link net.sf.mmm.search.indexer.api.strategy.SearchIndexerUpdateStrategy} for
+ * {@link SearchIndexerSource#UPDATE_STRATEGY_VCS}.
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-@Singleton
-@Named
 public class SearchIndexerUpdateStrategyLastModified extends AbstractCrawlingDeltaSearchIndexer {
 
   /**
@@ -84,9 +79,9 @@ public class SearchIndexerUpdateStrategyLastModified extends AbstractCrawlingDel
    * This method removes all entries from the search-indexer that have NOT been
    * {@link CountingEntryUpdateVisitor#visitIndexedEntryUri(String, net.sf.mmm.util.event.api.ChangeType)
    * visited} during the indexing/crawling.
-   * 
+   *
    * @see #createEntryUpdateVisitor()
-   * 
+   *
    * @param arguments are the {@link UpdateStrategyArguments}.
    */
   protected void removeNotVisitedResourceEntries(UpdateStrategyArguments arguments) {
@@ -96,13 +91,12 @@ public class SearchIndexerUpdateStrategyLastModified extends AbstractCrawlingDel
     SearchEngine searchEngine = indexer.getSearchEngine();
     String sourceId = arguments.getSource().getId();
     // would be a lot easier via termDocs(new Term("source", sourceId));
-    SearchQuery query = searchEngine.getQueryBuilder().createWordQuery(SearchEntry.FIELD_SOURCE,
-        sourceId);
+    SearchQuery query = searchEngine.getQueryBuilder().createWordQuery(SearchEntry.FIELD_SOURCE, sourceId);
     int hitsPerPage = Integer.MAX_VALUE;
     // get all hits... (TODO: use paging...?)
     SearchResultPage page = searchEngine.search(query, hitsPerPage);
-    CountingEntryUpdateVisitorCollector visitor = (CountingEntryUpdateVisitorCollector) arguments
-        .getContext().getVariable(CONTEXT_VARIABLE_ENTRY_UPDATE_VISITOR);
+    CountingEntryUpdateVisitorCollector visitor = (CountingEntryUpdateVisitorCollector) arguments.getContext()
+        .getVariable(CONTEXT_VARIABLE_ENTRY_UPDATE_VISITOR);
     Set<String> entryUriSet = visitor.getEntryUriSet();
     int hitCount = page.getPageHitCount();
     for (int i = 0; i < hitCount; i++) {

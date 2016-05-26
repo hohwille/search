@@ -2,6 +2,14 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.search.indexer.impl.lucene;
 
+import javax.inject.Inject;
+
+import org.junit.Assert;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
 import net.sf.mmm.search.engine.api.ManagedSearchEngine;
 import net.sf.mmm.search.engine.api.SearchEngine;
 import net.sf.mmm.search.engine.api.SearchEngineBuilder;
@@ -10,14 +18,9 @@ import net.sf.mmm.search.engine.api.SearchQuery;
 import net.sf.mmm.search.engine.api.SearchResultPage;
 import net.sf.mmm.search.engine.api.config.SearchEngineConfigurationHolder;
 import net.sf.mmm.search.engine.api.config.SearchEngineConfigurationLoader;
+import net.sf.mmm.search.engine.impl.spring.SearchEngineSpringConfig;
 import net.sf.mmm.search.indexer.impl.SearchIndexerMain;
 import net.sf.mmm.test.TestResourceHelper;
-import net.sf.mmm.util.component.api.IocContainer;
-import net.sf.mmm.util.component.base.SpringConfigs;
-import net.sf.mmm.util.component.impl.SpringContainerPool;
-
-import org.junit.Assert;
-import org.junit.Test;
 
 /**
  * This is the test-case for {@link LuceneSearchIndexer}. It is a complete integration test that performs the
@@ -27,7 +30,15 @@ import org.junit.Test;
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(classes = { SearchEngineSpringConfig.class })
 public class LuceneSearchIndexerTest {
+
+  @Inject
+  private SearchEngineConfigurationLoader searchEngineConfigurationLoader;
+
+  @Inject
+  private SearchEngineBuilder searchEngineBuilder;
 
   /**
    * This method performs a search for the given <code>query</code> that is expected to return a single
@@ -58,12 +69,10 @@ public class LuceneSearchIndexerTest {
     int exitCode = main.run("--config", configLocation, "--overwrite");
     Assert.assertEquals(0, exitCode);
 
-    IocContainer iocContainer = SpringContainerPool.getInstance(SpringConfigs.SPRING_XML_SEARCH_INDEXER);
-    SearchEngineConfigurationLoader configLoader = iocContainer.get(SearchEngineConfigurationLoader.class);
-    SearchEngineConfigurationHolder configurationHolder = configLoader.loadConfiguration(configLocation);
-    SearchEngineBuilder searchEngineBuilder = iocContainer.get(SearchEngineBuilder.class);
+    SearchEngineConfigurationHolder configurationHolder = this.searchEngineConfigurationLoader
+        .loadConfiguration(configLocation);
     String path = LuceneSearchIndexerTest.class.getName().replace('.', '/');
-    ManagedSearchEngine searchEngine = searchEngineBuilder.createSearchEngine(configurationHolder);
+    ManagedSearchEngine searchEngine = this.searchEngineBuilder.createSearchEngine(configurationHolder);
     try {
       // this query contains a crazy word that is unique in this project, it
       // only occurs once: in this source-file (which has been previously

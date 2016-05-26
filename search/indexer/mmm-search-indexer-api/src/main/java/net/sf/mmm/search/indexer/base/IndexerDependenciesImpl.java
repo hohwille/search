@@ -3,8 +3,6 @@
 package net.sf.mmm.search.indexer.base;
 
 import javax.inject.Inject;
-import javax.inject.Named;
-import javax.inject.Singleton;
 
 import net.sf.mmm.search.indexer.api.ResourceSearchIndexer;
 import net.sf.mmm.util.component.base.AbstractComponent;
@@ -13,12 +11,10 @@ import net.sf.mmm.util.resource.impl.BrowsableResourceFactoryImpl;
 
 /**
  * This is the implementation of the {@link IndexerDependencies}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-@Named(IndexerDependencies.CDI_NAME)
-@Singleton
 public class IndexerDependenciesImpl extends AbstractComponent implements IndexerDependencies {
 
   /** @see #getBrowsableResourceFactory() */

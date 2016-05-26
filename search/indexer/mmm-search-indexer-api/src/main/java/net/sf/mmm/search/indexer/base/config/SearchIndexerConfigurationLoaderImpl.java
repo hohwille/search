@@ -5,9 +5,6 @@ package net.sf.mmm.search.indexer.base.config;
 import java.util.Collection;
 import java.util.List;
 
-import javax.inject.Named;
-import javax.inject.Singleton;
-
 import net.sf.mmm.search.api.SearchException;
 import net.sf.mmm.search.api.config.SearchConfiguration;
 import net.sf.mmm.search.api.config.SearchSource;
@@ -23,14 +20,12 @@ import net.sf.mmm.util.xml.base.jaxb.XmlBeanMapper;
 
 /**
  * This is the implementation of {@link SearchIndexerConfigurationLoader}.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-@Singleton
-@Named(SearchIndexerConfigurationLoader.CDI_NAME)
-public class SearchIndexerConfigurationLoaderImpl extends XmlBeanMapper<SearchIndexerConfigurationBean> implements
-    SearchIndexerConfigurationLoader {
+public class SearchIndexerConfigurationLoaderImpl extends XmlBeanMapper<SearchIndexerConfigurationBean>
+    implements SearchIndexerConfigurationLoader {
 
   /**
    * The constructor.

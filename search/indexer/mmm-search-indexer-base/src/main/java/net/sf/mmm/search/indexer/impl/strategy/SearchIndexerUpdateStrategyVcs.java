@@ -8,8 +8,20 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.PreDestroy;
-import javax.inject.Named;
-import javax.inject.Singleton;
+
+import org.apache.maven.scm.ScmException;
+import org.apache.maven.scm.ScmFile;
+import org.apache.maven.scm.ScmFileSet;
+import org.apache.maven.scm.ScmFileStatus;
+import org.apache.maven.scm.command.update.UpdateScmResult;
+import org.apache.maven.scm.command.update.UpdateScmResultWithRevision;
+import org.apache.maven.scm.manager.NoSuchScmProviderException;
+import org.apache.maven.scm.manager.ScmManager;
+import org.apache.maven.scm.repository.ScmRepository;
+import org.apache.maven.scm.repository.UnknownRepositoryStructure;
+import org.codehaus.plexus.PlexusContainerException;
+import org.codehaus.plexus.component.repository.exception.ComponentLookupException;
+import org.codehaus.plexus.embed.Embedder;
 
 import net.sf.mmm.search.indexer.api.EntryUpdateVisitor;
 import net.sf.mmm.search.indexer.api.ResourceSearchIndexer;
@@ -26,30 +38,14 @@ import net.sf.mmm.util.exception.api.NlsNullPointerException;
 import net.sf.mmm.util.exception.api.ObjectNotFoundException;
 import net.sf.mmm.util.resource.api.DataResource;
 
-import org.apache.maven.scm.ScmException;
-import org.apache.maven.scm.ScmFile;
-import org.apache.maven.scm.ScmFileSet;
-import org.apache.maven.scm.ScmFileStatus;
-import org.apache.maven.scm.command.update.UpdateScmResult;
-import org.apache.maven.scm.command.update.UpdateScmResultWithRevision;
-import org.apache.maven.scm.manager.NoSuchScmProviderException;
-import org.apache.maven.scm.manager.ScmManager;
-import org.apache.maven.scm.repository.ScmRepository;
-import org.apache.maven.scm.repository.UnknownRepositoryStructure;
-import org.codehaus.plexus.PlexusContainerException;
-import org.codehaus.plexus.component.repository.exception.ComponentLookupException;
-import org.codehaus.plexus.embed.Embedder;
-
 /**
  * This is the implementation of the
- * {@link net.sf.mmm.search.indexer.api.strategy.SearchIndexerUpdateStrategy}
- * for {@link SearchIndexerSource#UPDATE_STRATEGY_LAST_MODIFIED}.
- * 
+ * {@link net.sf.mmm.search.indexer.api.strategy.SearchIndexerUpdateStrategy} for
+ * {@link SearchIndexerSource#UPDATE_STRATEGY_LAST_MODIFIED}.
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  * @since 1.0.0
  */
-@Singleton
-@Named
 public class SearchIndexerUpdateStrategyVcs extends BasicSearchIndexerUpdateStrategy {
 
   /** @see #getScmManager() */
@@ -62,7 +58,7 @@ public class SearchIndexerUpdateStrategyVcs extends BasicSearchIndexerUpdateStra
   private static final Map<String, String> FOLDER2VCS_MAP;
 
   static {
-    FOLDER2VCS_MAP = new HashMap<String, String>();
+    FOLDER2VCS_MAP = new HashMap<>();
     FOLDER2VCS_MAP.put(".svn", SearchIndexerDataLocation.UPDATE_STRATEGY_VCS_VARIANT_SVN);
     FOLDER2VCS_MAP.put(".bzr", SearchIndexerDataLocation.UPDATE_STRATEGY_VCS_VARIANT_BAZAAR);
     FOLDER2VCS_MAP.put(".hg", SearchIndexerDataLocation.UPDATE_STRATEGY_VCS_VARIANT_MERCURIAL);
@@ -81,9 +77,8 @@ public class SearchIndexerUpdateStrategyVcs extends BasicSearchIndexerUpdateStra
   }
 
   /**
-   * This method gets the {@link ScmManager} used to access the
-   * version-control-system (VCS).
-   * 
+   * This method gets the {@link ScmManager} used to access the version-control-system (VCS).
+   *
    * @return the {@link ScmManager}.
    */
   protected ScmManager getScmManager() {
@@ -126,11 +121,10 @@ public class SearchIndexerUpdateStrategyVcs extends BasicSearchIndexerUpdateStra
   }
 
   /**
-   * This method creates the {@link ScmManager} instance manually. This method
-   * is called during {@link #initialize() initialization} if the
-   * {@link ScmManager} has NOT been {@link #setScmManager(ScmManager) set}
-   * (injected) otherwise.
-   * 
+   * This method creates the {@link ScmManager} instance manually. This method is called during
+   * {@link #initialize() initialization} if the {@link ScmManager} has NOT been
+   * {@link #setScmManager(ScmManager) set} (injected) otherwise.
+   *
    * @return the created {@link ScmManager}.
    */
   protected ScmManager createScmManager() {
@@ -151,9 +145,8 @@ public class SearchIndexerUpdateStrategyVcs extends BasicSearchIndexerUpdateStra
   }
 
   /**
-   * This method tries to detect the VCS type for the given
-   * <code>location</code>.
-   * 
+   * This method tries to detect the VCS type for the given <code>location</code>.
+   *
    * @param location is the location for which the VCS-type is requested.
    * @return the detected VCS-type.
    * @throws RuntimeException if the VCS-type could NOT be detected.
@@ -179,15 +172,13 @@ public class SearchIndexerUpdateStrategyVcs extends BasicSearchIndexerUpdateStra
    * {@inheritDoc}
    */
   @Override
-  @SuppressWarnings("unchecked")
   public void index(UpdateStrategyArguments arguments, SearchIndexerDataLocation location,
       EntryUpdateVisitor entryUpdateVisitor) {
 
     File locationDirectory = new File(location.getLocationUri());
     String vcsType = location.getUpdateStrategyVariant();
     SearchIndexer indexer = arguments.getIndexer();
-    ResourceSearchIndexer resourceSearchIndexer = getIndexerDependencies()
-        .getResourceSearchIndexer();
+    ResourceSearchIndexer resourceSearchIndexer = getIndexerDependencies().getResourceSearchIndexer();
     // if
     // (SearchIndexerDataLocation.UPDATE_STRATEGY_VCS_VARIANT_RSYNC.equals(variant))
     // {
@@ -197,15 +188,13 @@ public class SearchIndexerUpdateStrategyVcs extends BasicSearchIndexerUpdateStra
       vcsType = detectVcsType(locationDirectory);
     }
     try {
-      ScmRepository vcsRepository = this.scmManager.makeProviderScmRepository(vcsType,
-          locationDirectory);
+      ScmRepository vcsRepository = this.scmManager.makeProviderScmRepository(vcsType, locationDirectory);
       ScmFileSet fileSet = new ScmFileSet(locationDirectory);
       UpdateScmResult result = this.scmManager.update(vcsRepository, fileSet);
       List<ScmFile> updatedFiles = result.getUpdatedFiles();
       for (ScmFile changedFile : updatedFiles) {
         String path = changedFile.getPath();
-        DataResource resource = getIndexerDependencies().getBrowsableResourceFactory()
-            .createDataResource(path);
+        DataResource resource = getIndexerDependencies().getBrowsableResourceFactory().createDataResource(path);
         ScmFileStatus status = changedFile.getStatus();
         ChangeType changeType;
         if (status == ScmFileStatus.ADDED) {
@@ -227,8 +216,7 @@ public class SearchIndexerUpdateStrategyVcs extends BasicSearchIndexerUpdateStra
       if (result instanceof UpdateScmResultWithRevision) {
         UpdateScmResultWithRevision resultWithRevision = (UpdateScmResultWithRevision) result;
         String revision = resultWithRevision.getRevision();
-        arguments.getSourceState().getLocationState(location.getLocationUri())
-            .setRevision(revision);
+        arguments.getSourceState().getLocationState(location.getLocationUri()).setRevision(revision);
       }
       // }
     } catch (NoSuchScmProviderException e) {

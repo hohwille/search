@@ -5,8 +5,11 @@ package net.sf.mmm.search.indexer.impl.lucene;
 import java.io.IOException;
 
 import javax.inject.Inject;
-import javax.inject.Named;
-import javax.inject.Singleton;
+
+import org.apache.lucene.analysis.Analyzer;
+import org.apache.lucene.index.IndexWriter;
+import org.apache.lucene.index.IndexWriter.MaxFieldLength;
+import org.apache.lucene.store.Directory;
 
 import net.sf.mmm.search.api.SearchException;
 import net.sf.mmm.search.base.SearchDependencies;
@@ -28,18 +31,11 @@ import net.sf.mmm.search.indexer.base.AbstractSearchIndexerBuilder;
 import net.sf.mmm.util.exception.api.NlsNullPointerException;
 import net.sf.mmm.util.io.api.RuntimeIoException;
 
-import org.apache.lucene.analysis.Analyzer;
-import org.apache.lucene.index.IndexWriter;
-import org.apache.lucene.index.IndexWriter.MaxFieldLength;
-import org.apache.lucene.store.Directory;
-
 /**
  * This is the implementation of {@link SearchIndexerBuilder} using lucene as underlying search-engine.
- * 
+ *
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
-@Named(SearchIndexerBuilder.CDI_NAME)
-@Singleton
 public class LuceneSearchIndexerBuilder extends AbstractSearchIndexerBuilder {
 
   /** @see #setLuceneAnalyzer(LuceneAnalyzer) */
@@ -195,7 +191,8 @@ public class LuceneSearchIndexerBuilder extends AbstractSearchIndexerBuilder {
         indexWriter = new IndexWriter(directory, this.analyzer, maxFieldLength);
       }
       LuceneFieldManager fieldManager = this.fiedManagerFactory.createFieldManager(configurationHolder);
-      return new LuceneSearchIndexer(indexWriter, this.luceneSearchEngineBuilder, fieldManager, this.searchDependencies);
+      return new LuceneSearchIndexer(indexWriter, this.luceneSearchEngineBuilder, fieldManager,
+          this.searchDependencies);
     } catch (IOException e) {
       throw new RuntimeIoException(e);
     }
