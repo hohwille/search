@@ -16,7 +16,7 @@
 
   <properties>
     <mmm.flatten.mode>bom</mmm.flatten.mode>
-    <org.apache.lucene.version>3.0.2</org.apache.lucene.version>
+    <org.apache.lucene.version>8.2.0</org.apache.lucene.version>
   </properties>
 
   <dependencyManagement>
