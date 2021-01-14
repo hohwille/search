@@ -15,7 +15,7 @@
   <description>Content parsers for MS office documents using apache POI.</description>
 
   <properties>
-    <org.apache.poi.version>3.7</org.apache.poi.version>
+    <org.apache.poi.version>4.1.2</org.apache.poi.version>
   </properties>
 
   <dependencies>
